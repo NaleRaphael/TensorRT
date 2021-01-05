@@ -72,14 +72,14 @@ RUN . /etc/os-release &&\
         python3.6 -m pip install wheel &&\
         ln -s /usr/bin/python3.6 /usr/bin/python3 &&\
         ln -s /usr/bin/python3.6 /usr/bin/python; \
-    elif [ "$VERSION_ID" = "20.04" ]; then \
+    elif [ "$VERSION_ID" = "20.04" ] || [ "$VERSION_ID" = "18.04" ]; then \
         add-apt-repository ppa:deadsnakes/ppa && apt-get update &&\
         apt-get remove -y python3 python && apt-get autoremove -y &&\
         apt-get install -y python3.7 python3.7-dev &&\
         cd /tmp && wget https://bootstrap.pypa.io/get-pip.py && python3.7 get-pip.py &&\
         python3.7 -m pip install wheel &&\
-        ln -s /usr/bin/python3.7 /usr/bin/python3 &&\
-        ln -s /usr/bin/python3.7 /usr/bin/python; \
+        ln -sf /usr/bin/python3.7 /usr/bin/python3 &&\
+        ln -sf /usr/bin/python3.7 /usr/bin/python; \
     else \
         apt-get update &&\
         apt-get install -y --no-install-recommends \
